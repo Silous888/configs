@@ -3,10 +3,6 @@
 watch_stylesheet: true
 watch_config: true
 debug: false
-komorebi:
-  start_command: "komorebic start --whkd"
-  stop_command: "komorebic stop --whkd"
-  reload_command: "komorebic stop --whkd && komorebic start --whkd"
 bars:
   primary-bar:
     enabled: true
@@ -39,10 +35,8 @@ bars:
     widgets:
       left: [
         "home",
-        "komorebi_workspaces",
         "glazewm_workspaces",
         "glazewm_tiling_direction",
-        "komorebi_active_layout",
         "apps",
         "taskbar",
       ]
@@ -98,6 +92,9 @@ widgets:
         next_track: "\udb81\udcad"
         play: "\ue768"
         pause: "\ue769"
+      callbacks:
+        on_left: "toggle_media_menu"
+        on_right: "toggle_label"
   active_window:
     type: "yasb.active_window.ActiveWindowWidget"
     options:
@@ -119,57 +116,6 @@ widgets:
       timezones: []
       callbacks:
         on_left:
-  komorebi_workspaces:
-    type: "komorebi.workspaces.WorkspaceWidget"
-    options:
-      label_offline: "\u23fc Offline"
-      label_workspace_btn: "\udb81\udc3d"
-      label_workspace_active_btn: ""
-      label_workspace_populated_btn: "\udb81\udc3e"
-      label_default_name: "{index}"
-      label_zero_index: false
-      hide_empty_workspaces: false
-      hide_if_offline: true
-      animation: true
-      container_padding:
-        top: 0
-        left: 8
-        bottom: 0
-        right: 8
-  komorebi_active_layout:
-    type: "komorebi.active_layout.ActiveLayoutWidget"
-    options:
-      hide_if_offline: true
-      label: "{icon}"
-      layouts:
-        [
-          "bsp",
-          "grid",
-          "vertical_stack",
-          "horizontal_stack",
-        ]
-      layout_icons:
-        bsp: "BSP"
-        columns: "COLS"
-        rows: "ROWS"
-        grid: "GRID"
-        vertical_stack: "V-STACK"
-        horizontal_stack: "H-STACK"
-        ultrawide_vertical_stack: "W-STACK"
-        right_main_vertical_stack: "RMV-STACK"
-        monocle: "MONOCLE"
-        maximised: "MAX"
-        floating: "FLOATING"
-        paused: "PAUSED"
-      container_padding:
-        top: 0
-        left: 8
-        bottom: 0
-        right: 8
-      callbacks:
-        on_left: "prev_layout"
-        on_middle: "toggle_monocle"
-        on_right: "next_layout"
   weather:
     type: "yasb.weather.WeatherWidget"
     options:
@@ -316,8 +262,8 @@ widgets:
     options:
       label: "<span>\udb83\ude09</span>"
       image_path: "F:\\Images\\wallpaper" # Example path to folder with images
-      change_automatically: false # Automatically change wallpaper
-      update_interval: 60 # If change_automatically is true, update interval in seconds
+      change_automatically: true # Automatically change wallpaper
+      update_interval: 7200 # If change_automatically is true, update interval in seconds
       gallery:
           enabled: true
           blur: true
@@ -425,11 +371,34 @@ widgets:
         color: "black"
         radius: 3
         offset: [ 1, 1 ]
-
-    # By default workspace names are fetched from GlazeWM and "display_name" option takes priority over "name".
-    # However, you can customize populated and empty labels here using {name} and {display_name} placeholders if needed.
-    # {name} will be replaced with workspace name (index) from GlazeWM.
-    # {display_name} will be replaced with workspace display_name from GlazeWM.
-
-    # populated_label: "{name} {display_name} \uebb4"
-    # empty_label: "{name} {display_name} \uebb5"
+  launchpad:
+    type: "yasb.launchpad.LaunchpadWidget"
+    options:
+      label: "<span>\udb85\udcde</span>"
+      search_placeholder: "Search apps..."
+      app_icon_size: 48
+      window:
+        fullscreen: false
+        width: 800
+        height: 600
+        overlay_block: true
+      window_style:
+        enable_blur: true
+        round_corners: true
+        round_corners_type: "normal"
+        border_color: "system"
+      window_animation:
+        fade_in_duration: 200
+        fade_out_duration: 200
+      callbacks:
+        on_left: "toggle_launchpad"
+      app_title_shadow:
+        enabled: true
+        color: "#00000090"
+        offset: [1, 1]
+        radius: 2
+      app_icon_shadow:
+        enabled: true
+        color: "#00000090"
+        offset: [0, 2]
+        radius: 8
