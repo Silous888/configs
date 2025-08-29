@@ -1,0 +1,383 @@
+# This is default and very simple configuration file for Yasb. 
+# For more information about configuration options, please visit the Wiki https://github.com/amnweb/yasb/wiki
+watch_stylesheet: false
+watch_config: false
+debug: false
+bars:
+  primary-bar:
+    enabled: true
+    screens: ["*"]
+    class_name: "yasb-bar"
+    alignment:
+      position: "top"
+      center: false
+    animation:
+      enabled: true
+      duration: 1000
+    blur_effect:
+      enabled: false
+      acrylic: false
+      dark_mode: false
+      round_corners: false
+      round_corners_type: "normal"
+      border_color: "System"
+    window_flags:
+      always_on_top: false
+      windows_app_bar: true
+    dimensions:
+      width: "100%"
+      height: 32
+    padding:
+      top: 4
+      left: 6
+      bottom: 0
+      right: 6
+    widgets:
+      left: [
+        "home",
+        "glazewm_workspaces",
+        "glazewm_tiling_direction",
+        "launchpad",
+        "apps",
+        "taskbar",
+      ]
+      center: [
+        "clock",
+      ]
+      right: [
+        "media",
+        "language",
+        "battery",
+        "bluetooth",
+        "wifi",
+        "volume",
+        "microphone",
+        "power_menu",
+        ]
+widgets:
+  home:
+    type: "yasb.home.HomeWidget"
+    options:
+      label: "<span>\udb81\udf17</span>"
+      menu_list:
+      - { title: "Documents", path: "C:\\Users\\MQNS9343\\Documents" }
+      - { title: "Images", path: "C:\\Users\\MQNS9343\\Images" }
+      - { title: "Musiques", path: "C:\\Users\\MQNS9343\\Musique"}
+      - { title: "Vidéos", path: "C:\\Users\\MQNS9343\\Vidéos" }
+      - { title: "Téléchargements", path: "C:\\Users\\MQNS9343\\Téléchargements" }
+      system_menu: true
+      power_menu: false
+      menu_labels:
+        system: "Paramètres"
+        about: "À propos de ce PC"
+        task_manager: "Gestionnaire de tâches"
+      blur: false
+  media:
+    type: "yasb.media.MediaWidget"
+    options:
+      label: "{title}"
+      label_alt: "{title}"
+      max_field_size:
+        label: 64
+        label_alt: 64
+      show_thumbnail: true
+      controls_only: false
+      controls_left: false
+      hide_empty: true
+      thumbnail_alpha: 150
+      thumbnail_padding: 8
+      thumbnail_corner_radius: 0
+      icons:
+        prev_track: "\udb81\udcae"
+        next_track: "\udb81\udcad"
+        play: "\ue768"
+        pause: "\ue769"
+      callbacks:
+        on_left: "toggle_media_menu"
+        on_right: "toggle_label"
+  active_window:
+    type: "yasb.active_window.ActiveWindowWidget"
+    options:
+      label: "{win[title]}"
+      label_alt: "[class_name='{win[class_name]}' exe='{win[process][name]}' hwnd={win[hwnd]}]"
+      label_no_window: ""
+      label_icon: true
+      label_icon_size: 14
+      max_length: 56
+      max_length_ellipsis: "..."
+      monitor_exclusive: false
+  clock:
+    type: "yasb.clock.ClockWidget"
+    options:
+      label: "{%A, %d %B %Y %H:%M}"
+      label_alt: "{%a, %d %b %H:%M}"
+      locale: "fr"
+      tooltip: false
+      timezones: []
+      callbacks:
+        on_left:
+  weather:
+    type: "yasb.weather.WeatherWidget"
+    options:
+      label: "<span>{icon}</span> {temp}"
+      label_alt: "{location}: Min {min_temp}, Max {max_temp}, Humidité {humidity}"
+      api_key: "3bf4cf9a7c3f40d6b31174128242807"
+      update_interval: 600
+      hide_decimal: true
+      location: "FRANCE Rennes 35000"
+      callbacks:
+        on_left: "toggle_label"
+      icons:
+        sunnyDay: "\udb81\udd99"
+        clearNight: "\udb81\udd99"
+        cloudyDay: "\udb81\udd99"
+        cloudyNight: "\udb81\udd99"
+        rainyDay: "\udb81\udd99"
+        rainyNight: "\udb81\udd99"
+        snowyIcyDay: "\udb81\udd99"
+        snowyIcyNight: "\udb81\udd99"
+        blizzard: "\udb81\udd99"
+        default: "\udb81\udd99"
+  volume:
+    type: "yasb.volume.VolumeWidget"
+    options:
+      label: "<span>{icon}</span> {level}"
+      label_alt: "{volume}"
+      volume_icons:
+        - "\ueee8"  # Icon for muted
+        - "\uf026"  # Icon for 0-10%
+        - "\uf027"  # Icon for 11-30%
+        - "\uf027"  # Icon for 31-60%
+        - "\uf028"  # Icon for 61-100%
+      audio_menu:
+        blur: True
+        round_corners: True
+        round_corners_type: 'normal'
+        border_color: 'System'
+        alignment: 'right'
+        direction: 'down'
+      callbacks:
+        on_left: "toggle_volume_menu"
+        on_right: "toggle_mute"
+      label_shadow:
+        enabled: true
+        color: "black"
+        radius: 3
+        offset: [ 1, 1 ]
+  bluetooth:
+    type: "yasb.bluetooth.BluetoothWidget"
+    options:
+      label: "<span>{icon}</span>"
+      label_alt: "{device_name}"
+      icons: 
+        bluetooth_on: "\udb80\udcaf"
+        bluetooth_off: "\udb80\udcb2"
+        bluetooth_connected: "\udb80\udcb1"
+      callbacks:
+        on_right: "exec cmd.exe /c start ms-settings:bluetooth"
+  microphone:
+    type: "yasb.microphone.MicrophoneWidget"
+    options:
+      label: "<span>{icon}</span> {level}"
+      label_alt: "<span>{icon}</span> {level}%"
+      icons:
+        normal: "\udb80\udf6c"
+        muted: "\udb80\udf6d"
+      callbacks:
+        on_left: "toggle_mute"
+        on_middle: "toggle_label"
+        on_right: "exec cmd.exe /c start ms-settings:sound"
+  power_menu:
+    type: "yasb.power_menu.PowerMenuWidget"
+    options:
+      label: "\uf011"
+      uptime: True
+      blur: False
+      blur_background: True
+      animation_duration: 200
+      button_row: 5
+      buttons:
+        shutdown: ["\uf011", "Éteindre"]
+        restart: ["\uead2", "Redémarrer"]
+        sleep: ["\u23fe", "Mise en veille"]
+        lock: ["\uea75", "Verrouiller"]
+        signout: ["\udb80\udf43", "Déconnexion"]
+        cancel: ["", "Annuler"]
+  apps:
+    type: "yasb.applications.ApplicationsWidget"
+    options:
+      container_padding:
+        top: 0
+        left: 8
+        bottom: 0
+        right: 8
+      label: "{data}"
+      app_list:
+        - { icon: "\uf422", launch: "C:\\Program Files\\WinLaunch\\WinLaunch.exe" }
+        - { icon: "\udb80\ude39",launch: "C:\\Users\\MQNS9343\\Documents\\logiciel\\floorp\\floorp.exe" }
+  taskbar:
+    type: "yasb.taskbar.TaskbarWidget"
+    options:
+      animation:
+        enabled: true
+      icon_size: 16
+      monitor_exclusive: false
+      ignore_apps:
+        processes: []
+        titles: []
+        classes: []
+      container_padding:
+        top: 0
+        left: 5
+        bottom: 0
+        right: 5
+  language:
+    type: "yasb.language.LanguageWidget"
+    options:
+      label: "{lang[country_code]}"
+      label_alt: "{lang[iso_language_code]}"
+      update_interval: 5
+      callbacks:
+        on_left: "toggle_menu"
+        on_middle: "do_nothing"
+        on_right: "do_nothing"
+      language_menu:
+        blur: true
+        round_corners: true
+        round_corners_type: "normal"
+        border_color: "system"
+        alignment: "right"
+        direction: "down"
+        offset_top: 6
+        offset_left: 0
+        show_layout_icon: true
+        layout_icon: "\uf11c"
+      label_shadow:
+        enabled: true
+        color: "black"
+        radius: 3
+        offset: [ 1, 1 ]
+  battery:
+    type: "yasb.battery.BatteryWidget"
+    options:
+      label: "<span>{icon}</span>{percent}%"
+      charging_options:
+        icon_format: "{charging_icon}"
+  whkd:
+    type: "yasb.whkd.WhkdWidget"
+    options:
+      label: "<span>\uf11c</span>"
+      special_keys:
+        - key: "win"
+          key_replace: "\ue70f"
+        - key: "ctrl"
+          key_replace: "Ctrl"
+        - key: "alt" 
+          key_replace: "Alt"
+        - key: "shift"
+          key_replace: "Shift"
+        - key: "left"
+          key_replace: "\u2190"
+        - key: "right"
+          key_replace: "\u2192"
+        - key: "up"
+          key_replace: "\u2191"
+        - key: "down"
+          key_replace: "\u2193"
+  glazewm_workspaces:
+    type: "glazewm.workspaces.GlazewmWorkspacesWidget"
+    options:
+      offline_label: ""
+      hide_empty_workspaces: false
+      hide_if_offline: true
+      btn_shadow:
+        enabled: true
+        color: "black"
+        radius: 3
+        offset: [ 1, 1 ]
+      container_padding: 
+        top: 0
+        left: 8
+        bottom: 0
+        right: 8
+  glazewm_tiling_direction:
+    type: "glazewm.tiling_direction.GlazewmTilingDirectionWidget"
+    options:
+      horizontal_label: "\udb81\udce1"
+      vertical_label: "\udb81\udce2"
+      btn_shadow:
+        enabled: true
+        color: "black"
+        radius: 3
+        offset: [ 1, 1 ]
+  glazewm_binding_mode:
+    type: "glazewm.binding_mode.GlazewmBindingModeWidget"
+    options:
+      hide_if_no_active: false
+      label_if_no_active: "No binding mode active"
+      container_padding:
+        top: 0
+        left: 0
+        bottom: 0
+        right: 0
+      callbacks:
+        on_left: "disable_binding_mode"
+        on_middle: "do_nothing"
+        on_right: "toggle_label"
+  wifi:
+    type: "yasb.wifi.WifiWidget"
+    options:
+      label: "<span>{wifi_icon}</span>"
+      label_alt: "{wifi_name}"
+      hide_if_ethernet: true
+      update_interval: 5000
+      callbacks:
+        on_left: "exec cmd.exe /c start ms-settings:network"
+        on_middle: "do_nothing"
+        on_right: "toggle_label"
+      ethernet_label: "<span>{wifi_icon}</span>"
+      ethernet_label_alt: "<span>{wifi_icon}</span>{ip_addr}"
+      ethernet_icon: "\ueba9"
+      wifi_icons: [
+        "\udb82\udd2e",  # Icon for 0% strength
+        "\udb82\udd1f",  # Icon for 1-24% strength
+        "\udb82\udd22",  # Icon for 25-49% strength
+        "\udb82\udd25",  # Icon for 50-74% strength
+        "\udb82\udd28"   # Icon for 75-100% strength
+      ]
+      label_shadow:
+        enabled: true
+        color: "black"
+        radius: 3
+        offset: [ 1, 1 ]
+  launchpad:
+    type: "yasb.launchpad.LaunchpadWidget"
+    options:
+      label: "<span>\udb85\udcde</span>"
+      search_placeholder: "Rechercher un logiciel..."
+      app_icon_size: 48
+      window:
+        fullscreen: false
+        width: 800
+        height: 600
+        overlay_block: true
+      window_style:
+        enable_blur: true
+        round_corners: true
+        round_corners_type: "normal"
+        border_color: "system"
+      window_animation:
+        fade_in_duration: 200
+        fade_out_duration: 200
+      callbacks:
+        on_left: "toggle_launchpad"
+      app_title_shadow:
+        enabled: true
+        color: "#00000090"
+        offset: [1, 1]
+        radius: 2
+      app_icon_shadow:
+        enabled: true
+        color: "#00000090"
+        offset: [0, 2]
+        radius: 8
