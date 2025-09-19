@@ -535,8 +535,6 @@ Example: "Windows Media" becomes "windows-media" */
     margin: 3px 0;
     border-radius: 12px;
     border: 1px solid var(--surface0);
-    display: flex;
-    align-items: center;
     padding: 0 6px;
 }
 
@@ -602,7 +600,6 @@ Example: "Windows Media" becomes "windows-media" */
     border-radius: 4px;
     margin: 0 4px;
     font-size: 1px;
-    box-sizing: border-box;
 }
 
 .glazewm-tiling-direction {
