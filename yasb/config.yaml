@@ -1,3 +1,5 @@
+# This is default and very simple configuration file for Yasb.
+# For more information about configuration options, please visit the Wiki https://github.com/amnweb/yasb/wiki
 watch_stylesheet: true
 watch_config: true
 debug: false
@@ -93,6 +95,38 @@ widgets:
       callbacks:
         on_left: "toggle_media_menu"
         on_right: "toggle_label"
+      media_menu:
+        blur: false                          # Whether to apply a blur effect to the popup background.
+        round_corners: true                  # Whether to round the corners of the popup.
+        round_corners_type: "normal"         # The type of corner rounding. Can be "normal" or "symmetric".
+        border_color: "system"               # The border color of the popup. Can be a HEX, None or "system".
+        alignment: "right"                   # The alignment of the popup relative to the widget. Can be "left", "center", or "right".
+        direction: "down"                    # The direction in which the popup opens. Can be "up" or "down".
+        offset_top: 6                        # The vertical offset of the popup from the widget.
+        offset_left: 0                       # The horizontal offset of the popup from the widget.
+        thumbnail_corner_radius: 8           # The corner radius for the thumbnail in the popup.
+        thumbnail_size: 120                  # The size of the thumbnail in the popup.
+        max_title_size: 60                   # The maximum size for the title in the popup.
+        max_artist_size: 20                  # The maximum size for the artist name in the popup.
+        show_source: true                    # Whether to show the media source (e.g., Spotify, YouTube) in the popup.
+        show_volume_slider: false            # Whether to show the volume slider in the popup. Volume control per application.
+      media_menu_icons:
+        play: "\ue768"       # Icon for the play button in the popup.
+        pause: "\ue769"      # Icon for the pause button in the popup.
+        prev_track: "\ue892" # Icon for the previous track button in the popup.
+        next_track: "\ue893" # Icon for the next track button in the popup.
+        mute: "\ue994"       # Icon for the mute button in the popup.
+        unmute: "\ue74f"     # Icon for the unmute button in the popup.
+      container_shadow:
+        enabled: false          # Whether to enable the container shadow.
+        color: "black"          # The color of the shadow. Can be a HEX value or color name.
+        radius: 3               # The blur radius of the shadow.
+        offset: [1, 1]          # The offset of the shadow in the format [x, y].
+      label_shadow:
+        enabled: false          # Whether to enable the label shadow.
+        color: "black"          # The color of the shadow. Can be a HEX value or color name.
+        radius: 3               # The blur radius of the shadow.
+        offset: [1, 1]   
   clock:
     type: "yasb.clock.ClockWidget"
     options:
